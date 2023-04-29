@@ -4,27 +4,18 @@
 //  Copyright © yagom academy. All rights reserved.
 //
 
-
-var computerRandomNumbers: Set<Int> = []
-var randomNumbers: Set<Int> = []
-
-func createRandomNumbers() -> (userRandomNumbers: [Int], computerRandomNumbers: [Int]) {
+func createRandomNumbers() -> [Int] {
+	var randomNumbers: Set<Int> = []
     randomNumbers.removeAll()
     while randomNumbers.count != 3 {
         randomNumbers.insert(Int.random(in: 1...9))
     }
-	while computerRandomNumbers.count != 3 {
-		computerRandomNumbers.insert(Int.random(in: 1...9))
-	}
-	let randomNumbers = Array(randomNumbers)
-	let computerRandomNumbers = Array(computerRandomNumbers)
-	let returnValue: ([Int], [Int]) = (randomNumbers, computerRandomNumbers)
-	
-    return returnValue
+    return Array(randomNumbers)
 }
 
 func judgeStrikeAndBall(_ computerRandomNumbers: [Int],_ randomNumbers: [Int]) -> (strike: Int, ball: Int) {
 	var strikeAndBall: (strike: Int, ball: Int) = (0, 0)
+	
     for i in 0...2 {
         if computerRandomNumbers[i] == randomNumbers[i] {
 			strikeAndBall.strike += 1
@@ -37,10 +28,10 @@ func judgeStrikeAndBall(_ computerRandomNumbers: [Int],_ randomNumbers: [Int]) -
 
 func startGame() {
     var remainCount: Int = 9
-	let computerRandomNumbers = createRandomNumbers().computerRandomNumbers
+	let computerRandomNumbers = createRandomNumbers()
 
     while remainCount > 0 {
-		let randomNumbers = createRandomNumbers().userRandomNumbers
+		let randomNumbers = createRandomNumbers()
         let judgeResult = judgeStrikeAndBall(computerRandomNumbers, randomNumbers)
 		let strike = judgeResult.strike
 		let ball = judgeResult.ball
