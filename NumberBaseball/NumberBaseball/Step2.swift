@@ -10,6 +10,9 @@ import Foundation
 enum GameError: Error {
 	case menuError
 	case wrongInputError
+    case wrongUserInput
+    case notOfTypeInt
+    case notAllowedDuplicatedNumber
 }
 
 func playNumberBaseBall() {
@@ -41,4 +44,15 @@ func selectMenu() throws {
 			print("게임을 종료합니다.")
 		}
 	}
+}
+
+func userInput() {
+    print("숫자 3개를 띄어쓰기로 구분하여 입력해주세요.")
+    print("중복된 숫자는 허용하지 않습니다.")
+    print("입력 :", terminator: " ")
+    guard let userInput = readLine()?.split(separator: " ") else { return }
+    if userInput.count != 3 {
+        print("입력이 잘못되었습니다.")
+        
+    }
 }
